@@ -360,12 +360,16 @@ LINUXINCLUDE    := -I$(srctree)/arch/$(hdr-arch)/include \
 
 KBUILD_CPPFLAGS := -D__KERNEL__
 
-KBUILD_CFLAGS   := -Wundef -Wstrict-prototypes -Wno-trigraphs \
+KBUILD_CFLAGS   := -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
-		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
-		   -Wno-maybe-uninitialized \
-		   -fno-delete-null-pointer-checks
+		   -fno-delete-null-pointer-checks \
+		-Wno-discarded-array-qualifiers -Wno-logical-not-parentheses -Wno-sequence-point \
+		-Wno-unused-function -Wno-unused -Wno-switch-bool -fgnu89-inline
+
+# Disabled original flags (compilation with 5.1 TCs):
+#		-Wall -Wundef -Wstrict-prototypes
+#		-Werror-implicit-function-declaration \
 
 # arter97's optimizations
 KBUILD_CFLAGS	+= -s -pipe -fno-pic -mcpu=cortex-a15 -mtune=cortex-a15 -mfloat-abi=softfp
